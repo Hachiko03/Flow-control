@@ -1,0 +1,112 @@
+@use "sass:color";
+
+$black: #000;
+$white: #fff;
+
+$font-sizes: 1rem, 2rem, 3rem;
+
+@function rem($px) {
+    $base:16px;
+    @return calc($px / $base) * 1rem;
+}
+
+$primary--color:color.adjust(red);
+$secundary--color:color.adjust(green);
+$ternary--color:color.adjust(blue);
+
+div {
+    color: green;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    border: rem(1px) solid $primary--color;
+    padding: rem(15px);
+}
+
+h1 {
+    text-decoration: underline $ternary--color rem(2px);
+    color: $secundary--color;
+    align-self: center;
+}
+
+section {
+    display: flex;
+}
+
+article {
+    border: rem(1px) solid green;
+    font-size: rem(20px);
+    margin-bottom: rem(10px);
+    p {
+        padding: rem(20px);
+        font-size: rem(20px);
+        text-align: center;
+        align-self: center
+    }
+}
+
+.one, .three {
+    @extend article ;
+    color: $primary--color;
+}
+
+.two, .four {
+    @extend article ;
+    color: $ternary--color;
+}
+
+h2 {
+    text-decoration: none;
+    @extend h1 ;
+    padding: 1rem;
+    border: rem(1px) solid $primary--color;
+}
+
+.footer {
+    margin-top: rem(10px);
+    @extend article ;
+    border: rem(1px) solid $ternary--color;
+    p {font-size: rem(24px);
+    }
+    width: 174ch;
+}
+
+section.num {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+/* Background color, color and font size*/
+
+@each $num in (1,2,3) {
+    .fs-#{$num}rem {
+        font-size: $num + rem;
+        width: rem(45px);
+        height: rem(45px);
+      }
+}
+
+@for $index from 1 through 20 {
+    $b-color: darken($white, $index * 5); 
+    $color-t: lighten($black, $index * 5);
+    .box-#{$index} {
+        background-color: $b-color;
+        color: $color-t;
+        padding: 0;
+
+        @if $index == 10 {
+            background-color:$ternary--color;
+            color: $primary--color;
+            justify-content: start;
+            align-items: start;
+           font-weight: bold;
+        }
+
+    }
+}
+
+.fs-1rem, .fs-2rem {
+  justify-content: start;
+  align-items: start;
+}
